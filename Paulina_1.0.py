@@ -8,7 +8,7 @@ try:
     reg = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
     key = winreg.OpenKey(reg, 'SOFTWARE\LegitCorp')
 
-    print("IOC1: LegitCorp found.")
+    print("IOC 1: LegitCorp found.")
 
     winreg.CloseKey(key)
 except:
