@@ -1,6 +1,6 @@
 import winreg
 
-REG_PATH = r"id"
+REG_PATH = "id"
 
 
 def CheckRegKey():
@@ -12,10 +12,10 @@ def CheckRegKey():
                                        winreg.KEY_READ)
         value, regtype = winreg.QueryValueEx(registry_key, 'name')
         winreg.CloseKey(registry_key)
-        if registry_key == '5':
+        if value == '5':
             return hit
         else:
-            print('whoops')
+            print('not found')
             return returner
     except WindowsError:
         return var
