@@ -1,11 +1,11 @@
-from _winreg import *
+import winreg
 
 #
 # IOC 1
 #
 print("IOC 1")
 try:
-    reg = ConnectRegistry(None, HKEY_LOCAL_MACHINE)
+    reg = ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
     key = OpenKey(reg, 'SOFTWARE\LegitCorp\Version')
     value = QueryValue(key, None)
 
@@ -25,7 +25,7 @@ print("IOC 1 Done")
 print("\nIOC 2")
 print("Checking for malicious value in SOFTWARE\Microsoft\Windows\CurrentVersion\Run")
 try:
-    reg = ConnectRegistry(None, HKEY_LOCAL_MACHINE)
+    reg = ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
     key = OpenKey(reg, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Run')
 
     counter = 0
@@ -34,7 +34,7 @@ try:
             value = EnumValue(key, counter)
 
             if "cscript.exe //nologo //e:jscript" in value[1]:
-               print "Found compromised entry '%s' with content '%s'" % (value[0], value[1])
+               print ("Found compromised entry '%s' with content '%s'" % (value[0], value[1]))
 
             counter += 1
         except(WindowsError):
