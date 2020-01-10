@@ -8,11 +8,17 @@ def handle(conn):
     else:
         print('You cool')
     
-
-sock = socket.socket()
-sock.bind(('', 80))
-sock.listen(1)
+def socket():
+    port = 80
+    sock = socket.socket()
+    sock.bind((127.0.0.1, port))
+    if port == 80:
+        port = 8080
+    elif port == 8080:
+        port = 80
+    sock.listen(1)
 
 while True:
+    socket()
     conn, addr = sock.accept()
     threading.Thread(target=handle, args=(conn,)).start()
