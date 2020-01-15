@@ -67,14 +67,19 @@ def Register_IOC1(basispad, sleutel):
             winreg.CloseKey(key)
     except:
             print("Registry entry " + sleutel + " not found.") 
-            print("Filler IOC 1 Done")
+            print("Registry IOC1 done")
     
 
 
-if __name__ == '__main__':
+def main():
     basispad = Opstellen_pad()
     sleutel = Opstellen_sleutel()
     print('Het door u gekozen pad is: ' + basispad + '\\' + sleutel)
     Register_IOC1(basispad, sleutel)
+
+
+if __name__ == '__main__':
+    main()
+
     
     
