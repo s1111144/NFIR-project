@@ -2,6 +2,8 @@ import os
 import stat
 import datetime as dt
 import argparse
+import sys
+import hashlib
 from pprint import pprint
 
 def selectie_pad():
@@ -50,7 +52,6 @@ def print_files(num_files, directory):
                 unix_modified_time = os.stat(os.path.join(root, file))[stat.ST_MTIME]
                 unix_accessed_time = os.stat(os.path.join(root, file))[stat.ST_ATIME]
                 human_modified_time = dt.datetime.fromtimestamp(unix_modified_time).strftime('%Y-%m-%d %H:%M:%S')
-                human_accessed_time = dt.datetime.fromtimestamp(unix_accessed_time).strftime('%Y-%m-%d %H:%M:%S')
                 filename = os.path.join(root, file)
                 modified.append((human_modified_time, filename))
                 accessed.append((human_accessed_time, filename))
@@ -59,10 +60,10 @@ def print_files(num_files, directory):
 
     modified.sort(key=lambda a: a[0], reverse=True)
     accessed.sort(key=lambda a: a[0], reverse=True)
-    print('Modified')
+    print('Date modified')
     pprint(modified[:num_files])
-    print('Accessed')
-    pprint(accessed[:num_files])
+
+
 
 
 def main():
