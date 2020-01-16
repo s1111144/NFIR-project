@@ -154,17 +154,19 @@ def calc_hash(scankeuze, uitgekozen_pad):
                 lijst.append(FileName)
                 lijst.append(hasher.hexdigest())
                 print(lijst)
+                
+""" Dit deel gaat de gemaakte hashlijst van de bestanden controleren met een bestaande hashlijst
+def check_hash(hashes_bestanden):                           #hashes_bestanden is dan de gemaakte lijst met hashes van de bestanden
+    with open(hashes_bestanden, 'r') as bestand1:
+        with open('hashes.txt', 'r') as bestand2:           #hashes.txt is dan de file met hashes
+            same = set(bestand1).intersection(bestand2)
 
-#def check_hash(FileName)
-#    with open(FileName, 'r') as bestand1:
-#    with open('hashes.txt', 'r') as bestand2:           #hashes.txt is dan de file met hashes
-#        same = set(bestand1).intersection(bestand2)
-#
-#same.discard('\n')
+    same.discard('\n')
 
-#with open('gevonden_hashes', 'w') as file_out:
-#    for line in same:
-#        file_out.write(line)	
+    with open('gevonden_hashes.txt', 'w') as file_out:
+        for line in same:
+            file_out.write(line)
+"""
                 
 def main():
     scankeuze = kiezen_optie()
@@ -173,6 +175,7 @@ def main():
     Register_IOC1(scankeuze, basispad, sleutel)
     uitgekozen_pad = selectie_pad(scankeuze)
     calc_hash(scankeuze, uitgekozen_pad)
+#    check_hash(hashes_bestanden)
 
 if __name__=='__main__':
     main()
