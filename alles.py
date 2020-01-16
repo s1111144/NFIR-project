@@ -3,33 +3,44 @@ import winreg
 
 def kiezen_optie():
     print('U heeft de mogelijkheid te kiezen uit:\n 1. Registry Checker\n 2. File Checker')
-    keuze = input('Welke van de opties wilt u kiezen? Voer de cijferwaarde in: ')
-
-    
-
-
-def Opstellen_pad():
-    print('U heeft gekozen voor de Registry Checker.\nDe mogelijkheden voor het scannen in de basispaden zijn:\n1. HKEY_CLASSES_ROOT\n2. HKEY_CURRENT_USER\n3. HKEY_LOCAL_MACHINE\n4. HKEY_USERS\n5. HKEY_CURRENT_CONFIG')
     while True:
-        basispad = input('Welk van bovenstaande basispaden wilt u gebruiken? Voer aub de cijferwaarde in: ')
-        if basispad == '1':
-            basispad = 'HKEY_CLASSES_ROOT'
+        scankeuze = input('Welke van de opties wilt u kiezen? Voer de cijferwaarde in: ')
+        if scankeuze == '1':
+            scankeuze = 'Registry'
             break
-        elif basispad == '2':
-            basispad = 'HKEY_CURRENT_USER'
-            break
-        elif basispad == '3':
-            basispad = 'HKEY_LOCAL_MACHINE'
-            break
-        elif basispad == '4':
-            basispad = 'HKEY_USERS'
-            break
-        elif basispad == '5':
-            basispad = 'HKEY_CURRENT_CONFIG'
+        elif scankeuze == '2':
+            scankeuze = 'File'
             break
         else:
             print('waarde niet bekend, probeer het opnieuw') 
-    return basispad
+    return scankeuze
+
+def Opstellen_pad(scankeuze):
+    if scankeuze == 'Registry':
+        print('U heeft gekozen voor de Registry Checker.\nDe mogelijkheden voor het scannen in de basispaden zijn:\n1. HKEY_CLASSES_ROOT\n2. HKEY_CURRENT_USER\n3. HKEY_LOCAL_MACHINE\n4. HKEY_USERS\n5. HKEY_CURRENT_CONFIG')
+        while True:
+            basispad = input('Welk van bovenstaande basispaden wilt u gebruiken? Voer aub de cijferwaarde in: ')
+            if basispad == '1':
+                basispad = 'HKEY_CLASSES_ROOT'
+                break
+            elif basispad == '2':
+                basispad = 'HKEY_CURRENT_USER'
+                break
+            elif basispad == '3':
+                basispad = 'HKEY_LOCAL_MACHINE'
+                break
+            elif basispad == '4':
+                basispad = 'HKEY_USERS'
+                break
+            elif basispad == '5':
+                basispad = 'HKEY_CURRENT_CONFIG'
+                break
+            else:
+                print('waarde niet bekend, probeer het opnieuw') 
+        return basispad
+    else: selectie_pad()
+        
+        
 
 def Opstellen_sleutel():
     while True:
@@ -44,8 +55,6 @@ def Opstellen_sleutel():
             print('Dit is een verplicht veld, wilt u deze invullen aub')
     return sleutel
       
-
-#
 def Register_IOC1(basispad, sleutel): 
     try:
         if basispad == 'HKEY_CLASSES_ROOT':
@@ -108,18 +117,17 @@ def calc_hash(uitgekozen_pad):
             lijst.append(hasher.hexdigest())
             
 
-            
-
 def main():
-    keuze = kiezen_optie()
-    basispad = Opstellen_pad()
+    scankeuze = kiezen_optie()
+    Opstellen_pad(scankeuze)
+    basispad = Opstellen_pad(scankeuze)
     sleutel = Opstellen_sleutel()
     print('Het door u gekozen pad is: ' + basispad + '\\' + sleutel)
     Register_IOC1(basispad, sleutel)
-    uitgekozen_pad = selectie_pad()
-    print('Het door u gekozen pad is: ' + uitgekozen_pad)
-    calc_hash(uitgekozen_pad)
-    print(lijst)
+    #uitgekozen_pad = selectie_pad()
+    #print('Het door u gekozen pad is: ' + uitgekozen_pad)
+    #calc_hash(uitgekozen_pad)
+    #print(lijst)
 
 if __name__=='__main__':
     main()
