@@ -155,16 +155,16 @@ def calc_hash(scankeuze, uitgekozen_pad):
                 lijst.append(hasher.hexdigest())
                 print(lijst)
 
-def check_hash(FileName)
-    with open(FileName, 'r') as bestand1:
-    with open('hashes.txt', 'r') as bestand2:           #hashes.txt is dan de file met hashes
-        same = set(bestand1).intersection(bestand2)
+#def check_hash(FileName)
+#    with open(FileName, 'r') as bestand1:
+#    with open('hashes.txt', 'r') as bestand2:           #hashes.txt is dan de file met hashes
+#        same = set(bestand1).intersection(bestand2)
+#
+#same.discard('\n')
 
-same.discard('\n')
-
-with open('gevonden_hashes', 'w') as file_out:
-    for line in same:
-        file_out.write(line)	
+#with open('gevonden_hashes', 'w') as file_out:
+#    for line in same:
+#        file_out.write(line)	
                 
 def main():
     scankeuze = kiezen_optie()
