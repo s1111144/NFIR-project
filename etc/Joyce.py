@@ -1,7 +1,12 @@
 # het aanmaken van een tekstfile
 # als het bestand nog niet bestaat wordt die aangemaakt
 
-f = open("variabele.txt", "w+")
+found_naam = 'found.txt'
+found = open(found_naam, "w+")
+
+
+not_found_naam = 'not_found.txt'
+not_found = open(not_found_naam, "w+")
 
 # variabele moet waarde found of not found krijgen
 
@@ -36,7 +41,7 @@ f.write(datum)
 import time
 
 start = time.time()
-en = time.time()
+end = time.time()
 duur = (end - start)
 f.write("De duur van de scan is:" duur "seconden")
 
