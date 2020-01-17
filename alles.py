@@ -53,6 +53,9 @@ def Opstellen_sleutel(scankeuze):
             else:
                 print('Dit is een verplicht veld, wilt u deze invullen aub')
         return sleutel
+
+# vanaf hier moet de .exe aangemaakt worden
+# pas wanneer de .exe wordt uitgevoerd moet onderstaande code uitgevoerd worden
       
 def Register_IOC1(scankeuze, basispad, sleutel):
     if scankeuze == 'Registry':
