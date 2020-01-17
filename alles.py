@@ -3,8 +3,10 @@ import winreg
 import datetime
 filename = datetime.datetime.now()
 
+keuzes = []
+
 def kiezen_optie():
-    print('U heeft de mogelijkheid te kiezen uit:\n 1. Registry Checker\n 2. File Checker')
+    print('U heeft de mogelijkheid te kiezen uit:\n 1. Registry Checker\n 2. File Checker\n 3. Exit')
     while True:
         scankeuze = input('Welke van de opties wilt u kiezen? Voer de cijferwaarde in: ')
         if scankeuze == '1':
@@ -12,6 +14,9 @@ def kiezen_optie():
             break
         elif scankeuze == '2':
             scankeuze = 'File'
+            break
+        elif scankeuze == '3':
+            scankeuze = 'Exit'
             break
         else:
             print('waarde niet bekend, probeer het opnieuw') 
@@ -41,21 +46,52 @@ def Opstellen_pad(scankeuze):
                 print('waarde niet bekend, probeer het opnieuw')
         return basispad
 
-def Opstellen_sleutel(scankeuze):
+def Opstellen_sleutel(scankeuze, basispad):
     if scankeuze == 'Registry':
         while True:
             sleutel = input('Welke map/sleutel wilt u zoeken?: ')
             bevestiging_sleutel = input('Is dit de juiste map/sleutel?: ' + sleutel + '\nGelieve te bevestigen in de vorm "ja" of "nee": ')
             if bevestiging_sleutel == 'ja':
+                
                 break
             elif bevestiging_sleutel == 'nee':
                 print('Voer opnieuw uw waarde in, aub')
             else:
                 print('Dit is een verplicht veld, wilt u deze invullen aub')
+        keuzes.append(basispad)
+        keuzes.append(sleutel)
+        print(keuzes)
         return sleutel
+
+def Exit(scankeuze):
+    if scankeuze == 'Exit':
+        while True:
+            bevestiging_keuze = input('Zijn deze paden correct? Gelieve te bevestigen in de vorm "ja" of "nee": ')
+            if bevestiging_keuze == 'ja':
+                print('EXE wordt aangemaakt')
+                break
+            elif bevestiging_keuze == 'nee':
+                print('Dat is naar, begin maar opnieuw')
+                exit()
+            else:
+                print('Dit is een verplicht veld, wilt u deze invullen aub')
+                
+
 
 # vanaf hier moet de .exe aangemaakt worden
 # pas wanneer de .exe wordt uitgevoerd moet onderstaande code uitgevoerd worden
+
+def Registry(keuzes):
+    basispad = ''
+    sleutel = ''
+    if keuzes != '':
+        for entry in keuzes:
+            if keuze[x/2 == True]:
+                basispad = entry
+            else:
+                sleutel = entry
+        
+    
       
 def Register_IOC1(scankeuze, basispad, sleutel):
     if scankeuze == 'Registry':
@@ -120,9 +156,6 @@ def Register_IOC1(scankeuze, basispad, sleutel):
                     not_found_naam = 'not_found.txt'
                     not_found = open(not_found_naam, "w+")
                     not_found.write("IOC 1: not found in het door u gekozen pad: " + basispad + '\\' + sleutel)
-
-        
-
                 
     
 def selectie_pad(scankeuze):
@@ -157,24 +190,14 @@ def calc_hash(scankeuze, uitgekozen_pad):
                 lijst.append(FileName)
                 lijst.append(hasher.hexdigest())
                 print(lijst)
-                
-""" Dit deel gaat de gemaakte hashlijst van de bestanden controleren met een bestaande hashlijst
-def check_hash(hashes_bestanden):                           #hashes_bestanden is dan de gemaakte lijst met hashes van de bestanden
-    with open(hashes_bestanden, 'r') as bestand1:
-        with open('hashes.txt', 'r') as bestand2:           #hashes.txt is dan de file met hashes
-            same = set(bestand1).intersection(bestand2)
 
-    same.discard('\n')
-
-    with open('gevonden_hashes.txt', 'w') as file_out:
-        for line in same:
-            file_out.write(line)
-"""
-                
+     
 def main():
     scankeuze = kiezen_optie()
     basispad = Opstellen_pad(scankeuze)
-    sleutel = Opstellen_sleutel(scankeuze)
+    sleutel = Opstellen_sleutel(scankeuze, basispad)
+    Exit(scankeuze
+         )
     Register_IOC1(scankeuze, basispad, sleutel)
     uitgekozen_pad = selectie_pad(scankeuze)
     calc_hash(scankeuze, uitgekozen_pad)
