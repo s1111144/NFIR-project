@@ -1,6 +1,11 @@
 import winreg
 
-path = 'Software'
+invoer = 'HKEY_CLASSES_ROOT\.3g2\OpenWithProgids'
+hkey = invoer.split('\\', 1)[0]
+path = invoer.split('\\', 1)[1]
+print ('- Input: ' + invoer)
+print ('- HKEY_*: ' + hkey)
+print ('- Path: ' + path)
 
 try:
     reg1 = winreg.OpenKey(winreg.HKEY_CLASSES_ROOT, path)
