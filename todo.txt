@@ -1,0 +1,27 @@
+- filechecker moet hash waarde checken
+- input moet ergens worden opgeslagen en pas in .exe toegepast worden
+
+- hetzelfde keuzemenu moet meerdere keren doorlopen kunnen worden
+- elke keuze moet worden opgeslagen voor de .exe
+
+- als je op exit klikt dan zie je je gegeven input
+- dan bevestig je je keuzes
+- dan wordt de .exe aangemaakt
+
+- setup.py
+
+- logfile voor filechecker en registrychecker
+- hostname in logfile
+- duur van de scan in logfile
+
+- handleiding
+
+- tekstbestand voordat .exe wordt uitgevoerd
+- wordt aangemaakt tegelijk met .exe
+- inhoud: wat de .exe precies gaat doen
+
+- commentaar in de code zetten
+- functies + hun argumenten toelichten
+
+- netwerk checker
+- mogelijkheid om aan het eind een gekozen pad nog te verwijderen
