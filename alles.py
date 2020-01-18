@@ -191,6 +191,18 @@ def calc_hash(scankeuze, uitgekozen_pad):
                 lijst.append(hasher.hexdigest())
                 print(lijst)
 
+        list1 = []
+        list2 = lijst
+
+        list1 = [line.rstrip('\n') for line in open("hashes.txt", 'r')]
+
+        intersection = set(list1).intersection(list2)      
+
+        print('\n De hashes die overeenkomen met de known malware hashes lijst, worden weggeschreven naar het bestand "gevonden_hashes.txt"')
+
+        with open('gevonden_hashes.txt', 'w') as file_out:
+            for line in intersection:
+                file_out.write(line + "\r\n")
      
 def main():
     scankeuze = kiezen_optie()
