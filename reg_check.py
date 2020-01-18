@@ -1,7 +1,24 @@
 import winreg
 
 check = 0
-invoer = 'HKEY_LOCAL_MACHINE\Software'
+invoer = input('Geef het pad op dat u wilt zoeken: ')
+bevestiging = input('Is dit het juiste pad?: ' + invoer + '\nGelieve te bevestigen in de vorm "ja" of "nee": ')
+while True:
+    if bevestiging == 'ja':
+        break
+    elif bevestiging == 'nee':
+        print('Voer opnieuw uw waarde in, aub') #na deze begint hij niet opnieuw
+        break
+    else:
+        print('Dit is een verplicht veld, wilt u deze invullen aub') #na deze begint hij niet opnieuw
+        break
+
+
+
+
+
+
+
 hkey = invoer.split('\\')[0]
 path = invoer.split('\\')[1]
 ##print ('- Input: ' + invoer)
