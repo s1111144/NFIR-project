@@ -27,7 +27,7 @@ def registry():
                 if hkey == 'HKEY_CLASSES_ROOT':
                     reg = winreg.OpenKey(winreg.HKEY_CLASSES_ROOT, path)
                     with open('reg_found.txt', 'a+') as file_out:
-                        file_out.write(hkey + ' ' + path + '\n' + '- Found' + '\n\n')
+                        file_out.write(hkey + ' ' + path + '\n - Found ' + '[%d-%m-%Y] [%H-%M-%S]'+ '\n\n')
                         file_out.close()
                     print('found')
                     winreg.CloseKey(reg)
