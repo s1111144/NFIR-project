@@ -175,45 +175,39 @@ def selectie_pad(scankeuze):
 def calc_hash(scankeuze, uitgekozen_pad):
     if scankeuze == 'File':
         lijst = []
+        lijst2 = [line.rstrip('\n') for line in open("hashes.txt", 'r')]
+    
         print('Het door u gekozen pad is: ' + uitgekozen_pad)
-        for root, dirs,files in os.walk(uitgekozen_pad, topdown=True):
+        for root, dirs, files in os.walk(uitgekozen_pad, topdown=True):          
             for name in files:
-                print(os.path.join(root, name))
                 FileName = (os.path.join(root, name))
-        
-
                 hasher = hashlib.md5()
-                with open(str(FileName), 'rb') as afile:
+                intersection = set(lijst).intersection(lijst2)
+                difference = set(lijst) - set(lijst2)
+                
+                with open(FileName, 'rb') as afile:
                     buf = afile.read()
                     hasher.update(buf)
+                    lijst.append(hasher.hexdigest())
                 print(hasher.hexdigest())
-                lijst.append(FileName)
-                lijst.append(hasher.hexdigest())
-                print(lijst)
+##                lijst.append(FileName)
+                
+                with open('gevonden_hashes.txt', 'w') as file_out:
+                    for line in intersection:
+                        file_out.write(FileName + "\t" + line + "\t" + "Found" + "\n")
+                    for line in difference:
+                        file_out.write(FileName + "\t" + line + "\t" + "Not found" + "\n")
+                print(FileName)  
 
-        list1 = []
-        list2 = lijst
 
-        list1 = [line.rstrip('\n') for line in open("hashes.txt", 'r')]
-
-        intersection = set(list1).intersection(list2)      
-
-        print('\n De hashes die overeenkomen met de known malware hashes lijst, worden weggeschreven naar het bestand "gevonden_hashes.txt"')
-
-        with open('gevonden_hashes.txt', 'w') as file_out:
-            for line in intersection:
-                file_out.write(line + "\r\n")
-     
 def main():
     scankeuze = kiezen_optie()
     basispad = Opstellen_pad(scankeuze)
     sleutel = Opstellen_sleutel(scankeuze, basispad)
-    Exit(scankeuze
-         )
+    Exit(scankeuze)
     Register_IOC1(scankeuze, basispad, sleutel)
     uitgekozen_pad = selectie_pad(scankeuze)
     calc_hash(scankeuze, uitgekozen_pad)
-#    check_hash(hashes_bestanden)
 
 if __name__=='__main__':
     main()
