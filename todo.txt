@@ -1,39 +1,15 @@
-- weggeschreven hashes moeten weggeschreven worden onder juiste filename
-- de bestandsnaam van file log moet variabel worden met found/not found
-- datum en tijd in de log
-- duur van de scan in log
-- hostname in filename
-- comments in code zetten
+- weggeschreven hashes moeten weggeschreven worden onder juiste filename (Maandagochtend)
+- comments in code zetten (Ieder eigen stuk)
 
 
 
-- handleiding technisch + gebruikers
-- tekstbestand met sporen na runnen exe
-- UML + functionele rapportages
-- product breakdown
-- Eindverslag
-- testrapportages
-- PvA
-- Agenda en notulen
-- 
+- handleiding technisch + gebruikers: Paulina & Joyce
+- tekstbestand met sporen na runnen exe: Alex 
+- UML + functionele rapportages: Robin 
+- product breakdown: Paulina
+- Eindverslag: Iedereen
+- testrapportages: Ieder 1
+- PvA:Iedereen 
+- (notulen: Joyce)
 
-
-- als je op exit klikt dan zie je je gegeven input
-- dan bevestig je je keuzes
-- dan wordt de .exe aangemaakt
-
-
-- logfile voor filechecker en registrychecker
-- hostname in logfile
-- duur van de scan in logfile
-
-- handleiding
-
-- tekstbestand voordat .exe wordt uitgevoerd
-- wordt aangemaakt tegelijk met .exe
-- inhoud: wat de .exe precies gaat doen
-
-- commentaar in de code zetten
-- functies + hun argumenten toelichten
-
-- 
+Woensdag op school af hebben
