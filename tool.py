@@ -13,6 +13,7 @@ def registry():
 
         x = 0
         y = 0
+        
         z = len(hkey_lijst)
         counter = 0
 
@@ -49,7 +50,8 @@ def registry():
                     winreg.CloseKey(reg)
 
                 elif hkey == 'HKEY_USERS':
-                    reg = winreg.OpenKey(winreg.HKEY_USERS, path)
+                    reg = winreg.OpenKey(winreg.HKEY_USERS, path
+                                         )
                     with open('reg_found.txt', 'a+') as file_out:
                         file_out.write(hkey + ' ' + path + '\n' + '- Found' + '\n\n')
                         file_out.close()
@@ -71,10 +73,42 @@ def registry():
     except:
         pass
 
+def file():
+##    try:
+        lijst = []
+        lijst2 = [line.rstrip('\n') for line in open('hashes.txt', 'r')]
+        uitgekozen_paden = [line.rstrip('\n') for line in open('file_invoer.txt', 'r')]
+
+        for entry in uitgekozen_paden:
+            uitgekozen_pad = entry
+            for root, dirs, files in os.walk(uitgekozen_pad, topdown=True):          
+                for name in files:
+                    FileName = (os.path.join(root, name))
+                    hasher = hashlib.md5()
+                    intersection = set(lijst).intersection(lijst2)
+                    difference = set(lijst) - set(lijst2)
+                    
+                    with open(FileName, 'rb') as afile:
+                        buf = afile.read()
+                        hasher.update(buf)
+                    lijst.append(hasher.hexdigest())
+                    print(hasher.hexdigest())
+        ##                lijst.append(FileName)
+                    
+                    with open('gevonden_hashes.txt', 'w') as file_out:
+                        for line in intersection:
+                            file_out.write(FileName + "\t" + line + "\t" + "Found" + "\n")
+                        for line in difference:
+                            file_out.write(FileName + "\t" + line + "\t" + "Not found" + "\n")
+                    print(FileName)
+##    except:
+##        pass
+
+
+
 def main():
     registry()
-##    uitgekozen_pad = selectie_pad(scankeuze)
-##    calc_hash(scankeuze, uitgekozen_pad)
+    file()
 
 if __name__=='__main__':
     main()

@@ -1,14 +1,27 @@
-- filechecker moet hash waarde checken
-- input moet ergens worden opgeslagen en pas in .exe toegepast worden
+- weggeschreven hashes moeten weggeschreven worden onder juiste filename
+- de bestandsnaam van file log moet variabel worden met found/not found
+- datum en tijd in de log
+- duur van de scan in log
+- hostname in filename
+- comments in code zetten
 
-- hetzelfde keuzemenu moet meerdere keren doorlopen kunnen worden
-- elke keuze moet worden opgeslagen voor de .exe
+
+
+- handleiding technisch + gebruikers
+- tekstbestand met sporen na runnen exe
+- UML + functionele rapportages
+- product breakdown
+- Eindverslag
+- testrapportages
+- PvA
+- Agenda en notulen
+- 
+
 
 - als je op exit klikt dan zie je je gegeven input
 - dan bevestig je je keuzes
 - dan wordt de .exe aangemaakt
 
-- setup.py
 
 - logfile voor filechecker en registrychecker
 - hostname in logfile
@@ -23,5 +36,4 @@
 - commentaar in de code zetten
 - functies + hun argumenten toelichten
 
-- netwerk checker
-- mogelijkheid om aan het eind een gekozen pad nog te verwijderen
+- 
