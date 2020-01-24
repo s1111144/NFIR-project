@@ -1,6 +1,6 @@
 import hashlib, os, sys
 
-
+#Joyce
 def kiezen_optie():
     print('U heeft de mogelijkheid te kiezen uit:\n 1. Registry Checker\n 2. File Checker\n 3. Exit')
     while True:
@@ -18,6 +18,8 @@ def kiezen_optie():
             print('waarde niet bekend, probeer het opnieuw')
     return scankeuze
 
+#/Joyce
+#Robin
 def register_input(scankeuze):
     if scankeuze == 'Registry':
         try:
@@ -30,11 +32,10 @@ def register_input(scankeuze):
                 if hkey != 'HKEY_CLASSES_ROOT' and hkey != 'HKEY_CURRENT_USER' and hkey != 'HKEY_LOCAL_MACHINE' and hkey != 'HKEY_USERS' and hkey != 'HKEY_CURRENT_CONFIG':
                     reg_invoer = input('Dit is een ongeldige waarde, voer AUB een geldige waarde in: ')
                     hkey = reg_invoer.split('\\')[0]
-                    reg_path = reg_invoer.split('\\')[1] 
-                else:
-                    print('top')
+                    reg_path = reg_invoer.split('\\')[1]
                     break
-                
+#/Robin
+#Alex                
             bevestiging = input('Is dit het juiste pad?: ' + reg_invoer + '\nGelieve te bevestigen in de vorm "ja" of "nee": ')
             while True:
                 if bevestiging == 'ja':
@@ -64,8 +65,9 @@ def register_input(scankeuze):
         except:
             print("Er is een ongeldig pad ingevoerd.")
             register_input(scankeuze)
+#/Alex
 
-
+#Joyce
 def selectie_pad(scankeuze):
         while True:
             uitgekozen_pad = input('U heeft gekozen voor de File Checker.\nBinnen welk pad wilt u zoeken?: ')
@@ -87,9 +89,9 @@ def selectie_pad(scankeuze):
             else:
                 print('Dit is een verplicht veld, wilt u deze invullen aub')
         return uitgekozen_pad
+#/Joyce
 
-
-
+#Robin
 def main():
     while True:
         scankeuze = kiezen_optie()
@@ -104,6 +106,7 @@ def main():
             elif check == 'nee':
                 print('U gaat terug naar het hoofdmenu.' + '\n')
     exit
+#/Robin
 
 
 
