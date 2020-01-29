@@ -35,7 +35,10 @@ def register_input(scankeuze):
                     reg_path = reg_invoer.split('\\')[1]
                     break
 #/Robin
-#Alex                
+#Alex
+            # de gebruiker wordt hier gevraagd om het pad te bevestigen
+            # invoer 'ja' schrijft het pad weg naar reg_invoer.txt
+            # wanneer geen 'ja' wordt ingevoerd moet de gebruiker het pad opnieuw invoeren of terugkeren naar het hoofdmenu
             bevestiging = input('Is dit het juiste pad?: ' + reg_invoer + '\nGelieve te bevestigen in de vorm "ja" of "nee": ')
             while True:
                 if bevestiging == 'ja':
