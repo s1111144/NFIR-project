@@ -11,9 +11,9 @@ myhost = socket.gethostname()
 def registry():
     start = time.time()
     try:
-        with open('reg_invoer.txt', 'r') as inlezen:
-            sleutels = inlezen.readlines()
-            hkey_lijst = [k.split()[0] for k in sleutels]
+        with open('reg_invoer.txt', 'r') as inlezen:                            #Deze functie is bedoelt voor het splitsen van de ingevoerde sleutels in een tweetal lijsten. Deze sleutels worden uitgelezen uit het tekstbestand "reg_invoer.txt"
+            sleutels = inlezen.readlines()                                      #Het eerste deel is het basispd van de te onderzoeken sleutel, het tweede deel de specifieke map of sleutel in dit pad
+            hkey_lijst = [k.split()[0] for k in sleutels]                       #Vervolgend worden de lijsten met elkaar vergeleken in de vorm van een if statement in een while loop, die net zo vaak loopt als het aantal aanwezige entries.
             path_lijst = [p.split()[1] for p in sleutels]
 
         x = 0
