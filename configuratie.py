@@ -21,16 +21,16 @@ def kiezen_optie():
 #/Joyce
 #Robin
 def register_input(scankeuze):
-    if scankeuze == 'Registry':
-        try:
+    if scankeuze == 'Registry':                                                                                             #In deze functie worden de basiswaarde en de sleutel/map ingevoerd door de gebruiker en gesplitst. 
+        try:                                                                                                                #Deze gesplitste basiswaarde wordt geebruikt om te bepalen of de gebbruiker een geldige waarde heeft ingevoerd.
             check = 0
             reg_invoer = input('U heeft gekozen voor de Registry Checker.\nGeef het pad op dat u wilt zoeken: ')
             hkey = reg_invoer.split('\\')[0]
             reg_path = reg_invoer.split('\\')[1]
             
             while True: 
-                if hkey != 'HKEY_CLASSES_ROOT' and hkey != 'HKEY_CURRENT_USER' and hkey != 'HKEY_LOCAL_MACHINE' and hkey != 'HKEY_USERS' and hkey != 'HKEY_CURRENT_CONFIG':
-                    reg_invoer = input('Dit is een ongeldige waarde, voer AUB een geldige waarde in: ')
+                if hkey != 'HKEY_CLASSES_ROOT' and hkey != 'HKEY_CURRENT_USER' and hkey != 'HKEY_LOCAL_MACHINE' and hkey != 'HKEY_USERS' and hkey != 'HKEY_CURRENT_CONFIG':             #De controle wordt hier uitgevoerd, zodra het basispadd niet overeenkomt met de bekende paden, wordt er gevraagd een nieuwe waarde in te voeren.
+                    reg_invoer = input('Dit is een ongeldige waarde, voer AUB een geldige waarde in: ')                                                                                 #Dit proces wordt herhaald tot er een geldige waarde wordt ingevoerd.
                     hkey = reg_invoer.split('\\')[0]
                     reg_path = reg_invoer.split('\\')[1]
                     break
@@ -92,9 +92,9 @@ def selectie_pad(scankeuze):
 #/Joyce
 
 #Robin
-def main():
-    while True:
-        scankeuze = kiezen_optie()
+def main():                                                                                                                             #De main is op deze manier opgesteld zodat er meerdere waarder ingevoerd kunnen worden, waarna het programma automatisch teruggaat naar het hoofdmenu. 
+    while True:                                                                                                                         #Er is een exit-beveiliging ingebouwd zodat de gebruiker op de hoogte is van het feit dat het scritpt afgesloten wordt. 
+        scankeuze = kiezen_optie()  
         if scankeuze == 'Registry': 
             check = register_input(scankeuze)
         elif scankeuze == 'File':
