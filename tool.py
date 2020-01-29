@@ -110,58 +110,62 @@ def registry():
         os.rename("reg_found.txt", "Not Found - Registry Log [" + myhost + "].txt")
 #/Joyce
 #Paulina
-##def file():
-####    try:
-##        x=0
-##        lijst = []
-##        lijst2 = [line.rstrip('\n') for line in open('hashes.txt', 'r')]
-##        uitgekozen_paden = [line.rstrip('\n') for line in open('file_invoer.txt', 'r')]
-##        FileNames = []
-##        intersection = set(lijst).intersection(lijst2)
-##        difference = set(lijst) - set(lijst2)
-##        #print(intersection)
-##
-##        for entry in uitgekozen_paden:
-##            uitgekozen_pad = entry
-###/Paulina
-###Alex
-##            for root, dirs, files in os.walk(uitgekozen_pad, topdown=True):
-##                for name in files:
-##                    FileNames.append(os.path.join(root, name))
-##                    print(FileNames)
-##                    with open(name, 'rb') as afile:
-##                        hasher = hashlib.md5()
-##                        buf = afile.read()
-##                        hasher.update(buf)
-##                    lijst.append(hasher.hexdigest())
-##                    print(hasher.hexdigest())
-##        ##                lijst.append(FileName)
+def file():
+    lijst = []
+    lijst2 = [line.rstrip('\n') for line in open("hashes.txt", 'r')]
+    lijst3 = []
+    lijst4 = []
+    datum = now.strftime("%d/%m/%Y %H:%M:%S")
+#/Paulina
+#Alex    
+        print('Het door u gekozen pad is: ' + uitgekozen_pad)
+
+        for root, dirs, files in os.walk(uitgekozen_pad, topdown=True):          
+            for name in files:
+                FileName = (os.path.join(root, name))
+                hasher = hashlib.md5()
+  
+                with open(FileName, 'rb') as afile:
+                    buf = afile.read()
+                    hasher.update(buf)
+                    lijst.append(hasher.hexdigest())
 #/Alex
-###Paulina
-##                    
-##                    with open('gevonden_hashes.txt', 'w') as file_out:
-##                        for line in intersection:
-##                            file_out.write(FileName + "\t" + line + "\t" + "Found" + "\n")
-##                        for line in difference:
-##                            file_out.write(FileName + "\t" + line + "\t" + "Not found" + "\n")
-##                    print(FileName)
-##
-##                    
-##                        lijst.append(hasher.hexdigest())
-##                        print(hasher.hexdigest())
-##                        with open('gevonden_hashes.txt', 'w') as file_out:
-##                            for names in FileNames:
-##                                naam = FileNames[x]
-##                                file_out.write(naam + "\t" + "Found" + "\n")
-##                                for line in difference:
-##                                    file_out.write(name + "\t" + line + "\t" + "Not found" + "\n")
-##
-##
-####    except:
-####        pass
-###/Paulina
+#Paulina
+                    hashes = (FileName + '\t' + hasher.hexdigest())     #In dit deel van de tool wordt de bestandsnaam samen met de hash in 1 lijn gestopt. Deze regel wordt dan vergeleken met lijst2 (known hashes).
+                    if any(x in hashes for x in lijst2):                #Als iets van deze regel in lijst2 gevonden wordt, wordt deze regel toegevoegd aan lijst3. 
+                        lijst3.append(hashes)                           #De regels die niet worden gevonden, worden in lijst4 gestopt. 
+                    else:
+                        lijst4.append(hashes)
 
+                with open('gevonden_hashes.txt', 'w') as file_out:          
+                    for line in lijst3:
+                        file_out.write(line + "\t" + "\n" + " + Found" + "\t" + datum + "\n\n")         #De regels uit lijst3 worden naar een log geschreven met "Found" en de datum waarop de scan is uitgevoerd.
+                    for line in lijst4:
+                        file_out.write(line + "\t" + "\n" + " - Not found" + "\t" + datum + "\n\n")     #De regels uit lijst4 worden naar dezelfde log geschreven, maar dan met "Not Found"
 
+        start = time.time()
+        end = time.time()
+        duur = (end - start)
+        duur = ("%.2f" % duur)
+
+        with open('gevonden_hashes.txt', 'a') as file_out:
+            file_out.write("De duur van de scan is: " + str(duur))
+            file_out.close()
+
+        with open('gevonden_hashes.txt', 'r') as file_out:
+            if '+' in file_out.read():
+                naam = 1
+                file_out.close()
+            else:
+                naam = 0
+                file_out.close()
+
+        if naam == 1:
+            os.rename("gevonden_hashes.txt", "Found - Hash Log [" + myhost + "].txt")       #Als de logs een + voor 1 van de regels hebben, verandert de bestandsnaam naar "Found". Hieraan wordt ook de hostnaam meegegeven.
+
+        elif naam == 0:
+            os.rename("gevonden_hashes.txt", "Not Found - Hash Log [" + myhost + "].txt")   #Als de logs een - voor 1 van de regels hebben, verandert de bestandsnaam naar "Not Found". Hieraan wordt ook de hostnaam meegegeven.
+#/Paulina  
 
 
 def main():
