@@ -102,7 +102,7 @@ def registry():
 
     elif naam == 0:
         os.rename("reg_found.txt", "Not Found - Registry Log [" + myhost + "].txt")
-#Joyce
+#/Joyce
 
 ##Paulina
 def file():
@@ -128,7 +128,7 @@ def file():
                     lijst.append(hasher.hexdigest())
 #/Alex
 #Paulina
-                    hashes = (FileName + '\t' + hasher.hexdigest())     #In dit deel van de tool wordt de bestandsnaam samen met de hash in 1 lijn gestopt. Deze regel wordt dan vergeleken met lijst2 (known hashes).
+                    hashes = (FileName + '\nMD5 Hash: ' + hasher.hexdigest())     #In dit deel van de tool wordt de bestandsnaam samen met de hash in 1 lijn gestopt. Deze regel wordt dan vergeleken met lijst2 (known hashes).
                     if any(x in hashes for x in lijst2):                #Als iets van deze regel in lijst2 gevonden wordt, wordt deze regel toegevoegd aan lijst3. 
                         lijst3.append(hashes)                           #De regels die niet worden gevonden, worden in lijst4 gestopt. 
                     else:
@@ -139,7 +139,8 @@ def file():
                         file_out.write(line + "\t" + "\n" + " + Found" + "\t" + datum + "\n\n")         #De regels uit lijst3 worden naar een log geschreven met "Found" en de datum waarop de scan is uitgevoerd.
                     for line in lijst4:
                         file_out.write(line + "\t" + "\n" + " - Not found" + "\t" + datum + "\n\n")     #De regels uit lijst4 worden naar dezelfde log geschreven, maar dan met "Not Found"
-
+#/Paulina
+#Alex
     end = time.time()
     duur = (end - start)
     duur = ("%.2f" % duur)
@@ -157,11 +158,11 @@ def file():
             file_out.close()
 
     if bestandsnaam == 1:
-        os.rename("gevonden_hashes.txt", "Found - Hash Log [" + myhost + "].txt")       #Als de logs een + voor 1 van de regels hebben, verandert de bestandsnaam naar "Found". Hieraan wordt ook de hostnaam meegegeven.
+        os.rename("gevonden_hashes.txt", "Found - File Log [" + myhost + "].txt")       #Als de logs een + voor 1 van de regels hebben, verandert de bestandsnaam naar "Found". Hieraan wordt ook de hostnaam meegegeven.
 
     elif bestandsnaam == 0:
-        os.rename("gevonden_hashes.txt", "Not Found - Hash Log [" + myhost + "].txt")   #Als de logs een - voor 1 van de regels hebben, verandert de bestandsnaam naar "Not Found". Hieraan wordt ook de hostnaam meegegeven.
-#/Paulina  
+        os.rename("gevonden_hashes.txt", "Not Found - File Log [" + myhost + "].txt")   #Als de logs een - voor 1 van de regels hebben, verandert de bestandsnaam naar "Not Found". Hieraan wordt ook de hostnaam meegegeven.
+#/Alex 
 
 def main():
     registry()
