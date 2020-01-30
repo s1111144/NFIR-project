@@ -141,6 +141,9 @@ def file():
                         file_out.write(line + "\t" + "\n" + " - Not found" + "\t" + datum + "\n\n")     #De regels uit lijst4 worden naar dezelfde log geschreven, maar dan met "Not Found"
 #/Paulina
 #Alex
+    # de duur van de scan wordt berekend en in de log file verwerkt
+    # de tekst '+' wordt weggeschreven wanneer een bestandspad is gevonden
+    # aan de hand van ten minste één '+' wordt de naam van het tekstbestand aangepast naar 'Found', zo niet dan 'Not Found' 
     endlog = time.time()
     duurlog = (endlog - startlog)
     duurlog = ("%.2f" % duurlog)
@@ -160,10 +163,9 @@ def file():
             file_out.close()
 
     if bestandsnaam == 1:
-        os.rename("gevonden_hashes.txt", "Found - File Log [" + myhost + "].txt")       #Als de logs een + voor 1 van de regels hebben, verandert de bestandsnaam naar "Found". Hieraan wordt ook de hostnaam meegegeven.
-
+        os.rename("gevonden_hashes.txt", "Found - File Log [" + myhost + "].txt")
     elif bestandsnaam == 0:
-        os.rename("gevonden_hashes.txt", "Not Found - File Log [" + myhost + "].txt")   #Als de logs een - voor 1 van de regels hebben, verandert de bestandsnaam naar "Not Found". Hieraan wordt ook de hostnaam meegegeven.
+        os.rename("gevonden_hashes.txt", "Not Found - File Log [" + myhost + "].txt")
 #/Alex 
 
 def main():
