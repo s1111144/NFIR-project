@@ -42,6 +42,7 @@ def registry():
                     winreg.CloseKey(reg)
 
                 elif hkey == 'HKEY_CURRENT_USER':
+                    datum = now.strftime("%d/%m/%Y %H:%M:%S")
                     reg = winreg.OpenKey(winreg.HKEY_CURRENT_USER, path)
                     with open('reg_found.txt', 'a+') as file_out:
                         file_out.write(hkey + '\\' + path + '\n + Found ' + datum + '\n\n')
@@ -49,6 +50,7 @@ def registry():
                     winreg.CloseKey(reg)
                 
                 elif hkey == 'HKEY_LOCAL_MACHINE':
+                    datum = now.strftime("%d/%m/%Y %H:%M:%S")
                     reg = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, path)
                     with open('reg_found.txt', 'a+') as file_out:
                         file_out.write(hkey + '\\' + path + '\n + Found ' + datum + '\n\n')
@@ -56,6 +58,7 @@ def registry():
                     winreg.CloseKey(reg)
 
                 elif hkey == 'HKEY_USERS':
+                    datum = now.strftime("%d/%m/%Y %H:%M:%S")
                     reg = winreg.OpenKey(winreg.HKEY_USERS, path)
                     with open('reg_found.txt', 'a+') as file_out:
                         file_out.write(hkey + '\\' + path + '\n + Found ' + datum + '\n\n')
@@ -63,6 +66,7 @@ def registry():
                     winreg.CloseKey(reg)
 
                 elif hkey == 'HKEY_CURRENT_CONFIG':
+                    datum = now.strftime("%d/%m/%Y %H:%M:%S")
                     reg = winreg.OpenKey(winreg.HKEY_CURRENT_CONFIG, path)
                     with open('reg_found.txt', 'a+') as file_out:
                         file_out.write(hkey + '\\' + path + '\n + Found ' + datum + '\n\n')
@@ -70,6 +74,7 @@ def registry():
                     winreg.CloseKey(reg)
             except:
                 with open('reg_found.txt', 'a+') as file_out:
+                    datum = now.strftime("%d/%m/%Y %H:%M:%S")
                     file_out.write(hkey + '\\' + path + '\n - Not Found ' + datum + '\n\n')
                     file_out.close()
     except:
