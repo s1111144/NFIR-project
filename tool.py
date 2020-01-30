@@ -80,28 +80,26 @@ def registry():
     except:
         pass
 #/Alex
-#Joyce  
+#Joyce
+    
     end = time.time()
     duur = (end - start)
     duur = ("%.2f" % duur)
-
-    with open("reg_found.txt", "a") as file_out:
-        file_out.write("De duur van de scan is: " + str(duur))
-        file_out.close()
-
-    with open("reg_found.txt", "r") as file_out:
-        if '+' in file_out.read():
-            naam = 1
-            file_out.close()        
-        else:
-            naam = 0
+    
+    if os.path.exists('reg_found.txt'):
+        with open("reg_found.txt", "a") as file_out:
+            file_out.write("De duur van de scan is: " + str(duur))
             file_out.close()
+            
+    if os.path.exists('reg_found.txt'):    
+        with open("reg_found.txt", "r") as file_out:
+            if '+' in file_out.read():
+                file_out.close()
+                os.rename("reg_found.txt", "Found - Registry Log [" + myhost + "].txt")
+            else:
+                file_out.close()
+                os.rename("reg_found.txt", "Not Found - Registry Log [" + myhost + "].txt")
 
-    if naam == 1:
-        os.rename("reg_found.txt", "Found - Registry Log [" + myhost + "].txt")
-
-    elif naam == 0:
-        os.rename("reg_found.txt", "Not Found - Registry Log [" + myhost + "].txt")
 #/Joyce
 
 ##Paulina
