@@ -80,29 +80,29 @@ def registry():
     except:
         pass
 #/Alex
-#Joyce  
+#Joyce
+    
     end = time.time()
     duur = (end - start)
     duur = ("%.2f" % duur)
-
-    with open("reg_found.txt", "a") as file_out:
-        file_out.write("De duur van de scan is: " + str(duur))
-        file_out.close()
-
-    with open("reg_found.txt", "r") as file_out:
-        if '+' in file_out.read():
-            naam = 1
-            file_out.close()        
-        else:
-            naam = 0
+    
+    if os.path.exists('reg_found.txt'):
+        with open("reg_found.txt", "r+") as file_out:
+            content = file_out.read()
+            file_out.seek(0, 0)
+            file_out.write("De duur van de scan is: " + str(duur).rstrip('\r\n') + '\n\n' + content)
             file_out.close()
+            
+    if os.path.exists('reg_found.txt'):    
+        with open("reg_found.txt", "r") as file_out:
+            if '+' in file_out.read():
+                file_out.close()
+                os.rename("reg_found.txt", "Found - Registry Log [" + myhost + "].txt")
+            else:
+                file_out.close()
+                os.rename("reg_found.txt", "Not Found - Registry Log [" + myhost + "].txt")
 
-    if naam == 1:
-        os.rename("reg_found.txt", "Found - Registry Log [" + myhost + "].txt")
-
-    elif naam == 0:
-        os.rename("reg_found.txt", "Not Found - Registry Log [" + myhost + "].txt")
-#Joyce
+#/Joyce
 
 ##Paulina
 def file():
@@ -112,7 +112,7 @@ def file():
     lijst4 = []
     datum = now.strftime("%d/%m/%Y %H:%M:%S")
     uitgekozen_paden = [line.rstrip('\n') for line in open('file_invoer.txt', 'r')]
-    start = time.time()
+    startlog = time.time()
 #/Paulina
 #Alex
     for entry in uitgekozen_paden:
@@ -128,7 +128,7 @@ def file():
                     lijst.append(hasher.hexdigest())
 #/Alex
 #Paulina
-                    hashes = (FileName + '\t' + hasher.hexdigest())     #In dit deel van de tool wordt de bestandsnaam samen met de hash in 1 lijn gestopt. Deze regel wordt dan vergeleken met lijst2 (known hashes).
+                    hashes = (FileName + '\nMD5 Hash: ' + hasher.hexdigest())     #In dit deel van de tool wordt de bestandsnaam samen met de hash in 1 lijn gestopt. Deze regel wordt dan vergeleken met lijst2 (known hashes).
                     if any(x in hashes for x in lijst2):                #Als iets van deze regel in lijst2 gevonden wordt, wordt deze regel toegevoegd aan lijst3. 
                         lijst3.append(hashes)                           #De regels die niet worden gevonden, worden in lijst4 gestopt. 
                     else:
@@ -139,13 +139,19 @@ def file():
                         file_out.write(line + "\t" + "\n" + " + Found" + "\t" + datum + "\n\n")         #De regels uit lijst3 worden naar een log geschreven met "Found" en de datum waarop de scan is uitgevoerd.
                     for line in lijst4:
                         file_out.write(line + "\t" + "\n" + " - Not found" + "\t" + datum + "\n\n")     #De regels uit lijst4 worden naar dezelfde log geschreven, maar dan met "Not Found"
+#/Paulina
+#Alex
+    # de duur van de scan wordt berekend en in de log file verwerkt
+    # de tekst '+' wordt weggeschreven wanneer een bestandspad is gevonden
+    # aan de hand van ten minste één '+' wordt de naam van het tekstbestand aangepast naar 'Found', zo niet dan 'Not Found' 
+    endlog = time.time()
+    duurlog = (endlog - startlog)
+    duurlog = ("%.2f" % duurlog)
 
-    end = time.time()
-    duur = (end - start)
-    duur = ("%.2f" % duur)
-
-    with open('gevonden_hashes.txt', 'a') as file_out:
-        file_out.write("De duur van de scan is: " + str(duur))
+    with open('gevonden_hashes.txt', 'r+') as file_out:
+        content = file_out.read()
+        file_out.seek(0, 0)
+        file_out.write("De duur van de scan is: " + str(duurlog).rstrip('\r\n') + '\n\n' + content)
         file_out.close()
 
     with open('gevonden_hashes.txt', 'r') as file_out:
@@ -157,11 +163,10 @@ def file():
             file_out.close()
 
     if bestandsnaam == 1:
-        os.rename("gevonden_hashes.txt", "Found - Hash Log [" + myhost + "].txt")       #Als de logs een + voor 1 van de regels hebben, verandert de bestandsnaam naar "Found". Hieraan wordt ook de hostnaam meegegeven.
-
+        os.rename("gevonden_hashes.txt", "Found - File Log [" + myhost + "].txt")
     elif bestandsnaam == 0:
-        os.rename("gevonden_hashes.txt", "Not Found - Hash Log [" + myhost + "].txt")   #Als de logs een - voor 1 van de regels hebben, verandert de bestandsnaam naar "Not Found". Hieraan wordt ook de hostnaam meegegeven.
-#/Paulina  
+        os.rename("gevonden_hashes.txt", "Not Found - File Log [" + myhost + "].txt")
+#/Alex 
 
 def main():
     registry()
