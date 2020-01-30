@@ -1,8 +1,8 @@
 import hashlib, os, sys
 import winreg
-from datetime import datetime
-import time
 import socket
+import time
+from datetime import datetime
 now = datetime.now()
 myhost = socket.gethostname()
 
