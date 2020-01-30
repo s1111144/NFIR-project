@@ -112,7 +112,7 @@ def file():
     lijst4 = []
     datum = now.strftime("%d/%m/%Y %H:%M:%S")
     uitgekozen_paden = [line.rstrip('\n') for line in open('file_invoer.txt', 'r')]
-    start = time.time()
+    startlog = time.time()
 #/Paulina
 #Alex
     for entry in uitgekozen_paden:
@@ -141,12 +141,12 @@ def file():
                         file_out.write(line + "\t" + "\n" + " - Not found" + "\t" + datum + "\n\n")     #De regels uit lijst4 worden naar dezelfde log geschreven, maar dan met "Not Found"
 #/Paulina
 #Alex
-    end = time.time()
-    duur = (end - start)
-    duur = ("%.2f" % duur)
+    endlog = time.time()
+    duurlog = (endlog - startlog)
+    duurlog = ("%.2f" % duurlog)
 
     with open('gevonden_hashes.txt', 'a') as file_out:
-        file_out.write("De duur van de scan is: " + str(duur))
+        file_out.write("De duur van de scan is: " + str(duurlog))
         file_out.close()
 
     with open('gevonden_hashes.txt', 'r') as file_out:
