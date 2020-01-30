@@ -160,7 +160,7 @@ def file():
         file_out.close()
 
     with open('gevonden_hashes.txt', 'r') as file_out:
-        if '+' in file_out.read():
+        if '+ Found' in file_out.read():
             bestandsnaam = 1
             file_out.close()
         else:
