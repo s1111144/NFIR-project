@@ -87,8 +87,10 @@ def registry():
     duur = ("%.2f" % duur)
     
     if os.path.exists('reg_found.txt'):
-        with open("reg_found.txt", "a") as file_out:
-            file_out.write("De duur van de scan is: " + str(duur))
+        with open("reg_found.txt", "r+") as file_out:
+            content = file_out.read()
+            file_out.seek(0, 0)
+            file_out.write("De duur van de scan is: " + str(duur).rstrip('\r\n') + '\n\n' + content)
             file_out.close()
             
     if os.path.exists('reg_found.txt'):    
@@ -143,8 +145,10 @@ def file():
     duurlog = (endlog - startlog)
     duurlog = ("%.2f" % duurlog)
 
-    with open('gevonden_hashes.txt', 'a') as file_out:
-        file_out.write("De duur van de scan is: " + str(duurlog))
+    with open('gevonden_hashes.txt', 'r+') as file_out:
+        content = file_out.read()
+        file_out.seek(0, 0)
+        file_out.write("De duur van de scan is: " + str(duurlog).rstrip('\r\n') + '\n\n' + content)
         file_out.close()
 
     with open('gevonden_hashes.txt', 'r') as file_out:
