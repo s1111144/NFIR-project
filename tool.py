@@ -1,8 +1,8 @@
-import hashlib, os, sys
-import winreg
-import socket
-import time
-from datetime import datetime
+import hashlib, os, sys # hiermee kan gehasht worden en door bestandspaden gezocht worden
+import winreg # hiermee kunnen opgegeven registerpaden gelezen worden
+import socket # hiermee kan de hostnaam gevonden worden
+import time # hiermee kan de duur van een scan berekend worden
+from datetime import datetime # hiermee kan in het logbestand weergeven worden wanneer een scan is uitgevoerd
 now = datetime.now()
 myhost = socket.gethostname()
 
@@ -81,7 +81,8 @@ def registry():
         pass
 #/Alex
 #Joyce
-    
+    #dit stukje berekent de tijd die de scan duurt en geeft deze terug in 2 decimalen achter de komma.
+    #dit wordt weggeschreven in de log files.
     end = time.time()
     duur = (end - start)
     duur = ("%.2f" % duur)
@@ -93,6 +94,8 @@ def registry():
             file_out.write("De duur van de scan is: " + str(duur).rstrip('\r\n') + '\n\n' + content)
             file_out.close()
             
+    #hier wordt gekeken in de log file. Als er found is, dan komt er een + in de log file. Deze wordt dan herkend en de naam van het logbestand wordt aangepast naar "found"
+    #als er geen + in staat dan wordt de naam van de logfile aangepast naar "not found"               
     if os.path.exists('reg_found.txt'):    
         with open("reg_found.txt", "r") as file_out:
             if '+' in file_out.read():
@@ -115,6 +118,8 @@ def file():
     startlog = time.time()
 #/Paulina
 #Alex
+    # alle eerder ingevoerde paden zullen hier worden gescand
+    # alle bestanden binnen de ingevoerde paden worden hierbij gehasht dmv MD5 om later te kunnen vergelijken
     for entry in uitgekozen_paden:
         uitgekozen_pad = entry
         for root, dirs, files in os.walk(uitgekozen_pad, topdown=True):          
