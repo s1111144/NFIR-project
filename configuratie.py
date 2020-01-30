@@ -33,6 +33,7 @@ def register_input(scankeuze):
                     reg_invoer = input('Dit is een ongeldige waarde, voer AUB een geldige waarde in: ')                                                                                 #Dit proces wordt herhaald tot er een geldige waarde wordt ingevoerd.
                     hkey = reg_invoer.split('\\')[0]
                     reg_path = reg_invoer.split('\\')[1]
+                else:
                     break
 #/Robin
 #Alex
@@ -51,7 +52,7 @@ def register_input(scankeuze):
                 elif bevestiging == 'nee':
                     check = input('Wilt u het nogmaals proberen? Antwoord met "ja" of "nee", aub: ')
                     if check == 'ja':
-                        print('Voer opnieuw uw waarde in, aub') #na deze begint hij niet opnieuw
+                        print('Voer opnieuw uw waarde in, aub')
                         register_input(scankeuze)
                     elif check == 'nee':
                         print('U gaat terug naar het hoofdmenu')
@@ -59,7 +60,7 @@ def register_input(scankeuze):
                 else:
                     check = input('Wilt u het nogmaals proberen? Antwoord met "ja" of "nee", aub: ')
                     if check == 'ja':
-                        print('Voer opnieuw uw waarde in, aub') #na deze begint hij niet opnieuw
+                        print('Voer opnieuw uw waarde in, aub')
                         register_input(scankeuze)
                     elif check == 'nee':
                         print('U gaat terug naar het hoofdmenu')
@@ -72,26 +73,51 @@ def register_input(scankeuze):
 
 #Joyce
 def selectie_pad(scankeuze):
-        while True:
-            uitgekozen_pad = input('U heeft gekozen voor de File Checker.\nBinnen welk pad wilt u zoeken?: ')
-            bevestiging_pad = input('Is dit het juiste pad?: ' + uitgekozen_pad + '\nGelieve te bevestigen in de vorm "ja" of "nee": ')
-            if bevestiging_pad == 'ja':
-                with open('file_invoer.txt', 'a+') as file_out:
-                    file_out.write(uitgekozen_pad + '\n')
-                    file_out.close()
-                    check = 'ja'
-                    print(uitgekozen_pad + ' wordt weggeschreven naar file_invoer.txt.\n')
-                break
-            elif bevestiging_pad == 'nee':
-                check = input('Wilt u het nogmaals proberen? Antwoord met "ja" of "nee", aub: ')
-                if check == 'ja':
-                    print('Voer opnieuw uw waarde in, aub') #na deze begint hij niet opnieuw
-                    selectie_pad(scankeuze)
-                elif check == 'nee':
-                    print('U gaat terug naar het hoofdmenu')
-            else:
-                print('Dit is een verplicht veld, wilt u deze invullen aub')
-        return uitgekozen_pad
+        if scankeuze == 'File':  
+            try:
+                check = 0
+                uitgekozen_pad = input('U heeft gekozen voor de File Checker.\nBinnen welk pad wilt u zoeken?: ')
+                while True:
+                    bevestiging_pad = input('Is dit het juiste pad?: ' + uitgekozen_pad + '\nGelieve te bevestigen in de vorm "ja" of "nee": ')
+                    if bevestiging_pad == 'ja':
+                        with open('file_invoer.txt', 'a+') as file_out:
+                            file_out.write(uitgekozen_pad + '\n')
+                            file_out.close()
+                            check = 'ja'
+                            print(uitgekozen_pad + ' wordt weggeschreven naar file_invoer.txt.\n')
+                        break
+                    elif bevestiging_pad == 'nee':
+                        check = input('Wilt u het nogmaals proberen? Antwoord met "ja" of "nee", aub: ')
+                        if check == 'ja':
+                            print('Voer opnieuw uw waarde in, aub')
+                            selectie_pad(scankeuze)
+                        elif check == 'nee':
+                            print('U gaat terug naar het hoofdmenu')
+                        break
+                    else:
+                        check = input('Wilt u het nogmaals proberen? Antwoord met "ja" of "nee", aub: ')
+                        if check == 'ja':
+                            print('Voer opnieuw uw waarde in, aub')
+                            selectie_pad(scankeuze)
+                        elif check == 'nee':
+                            print('U gaat terug naar het hoofdmenu')
+                        break
+                return uitgekozen_pad
+            except:
+                print("Er is een ongeldig pad ingevoerd.")
+                selectie_pad(scankeuze)
+
+                
+    ##                elif bevestiging_pad == 'nee':
+    ##                    check = input('Wilt u het nogmaals proberen? Antwoord met "ja" of "nee", aub: ')
+    ##                    if check == 'ja':
+    ##                        print('Voer opnieuw uw waarde in, aub') #na deze begint hij niet opnieuw
+    ##                        selectie_pad(scankeuze)
+    ##                    elif check == 'nee':
+    ##                        print('U gaat terug naar het hoofdmenu')
+    ##                else:
+    ##                    print('Dit is een verplicht veld, wilt u deze invullen aub')
+    ##            return uitgekozen_pad
 #/Joyce
 
 #Robin
