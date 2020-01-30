@@ -106,18 +106,6 @@ def selectie_pad(scankeuze):
             except:
                 print("Er is een ongeldig pad ingevoerd.")
                 selectie_pad(scankeuze)
-
-                
-    ##                elif bevestiging_pad == 'nee':
-    ##                    check = input('Wilt u het nogmaals proberen? Antwoord met "ja" of "nee", aub: ')
-    ##                    if check == 'ja':
-    ##                        print('Voer opnieuw uw waarde in, aub') #na deze begint hij niet opnieuw
-    ##                        selectie_pad(scankeuze)
-    ##                    elif check == 'nee':
-    ##                        print('U gaat terug naar het hoofdmenu')
-    ##                else:
-    ##                    print('Dit is een verplicht veld, wilt u deze invullen aub')
-    ##            return uitgekozen_pad
 #/Joyce
 
 #Robin
